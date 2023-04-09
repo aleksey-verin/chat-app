@@ -5,9 +5,20 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Main from './components/Main';
 import { selectorUserAuthenticationSlice } from './store/reducers/userAuthenticationSlice';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getMessages } from './store/reducers/messagesSlice';
+import { useAppDispatch } from './store/store';
 
 function App() {
-  const { isAuth } = useSelector(selectorUserAuthenticationSlice);
+  const dispatch = useAppDispatch();
+  const { isAuth, userToken } = useSelector(selectorUserAuthenticationSlice);
+
+  useEffect(() => {
+    if (userToken) {
+      dispatch(getMessages(userToken));
+    }
+  }, []);
 
   return (
     <div className="wrapper">
