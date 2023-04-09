@@ -6,7 +6,7 @@ const Footer = () => {
       <form className="send-message" id="sendMessage" action="">
         <textarea
           className="textarea-message"
-          placeholder="сообщение.."
+          placeholder="message.."
           autoComplete="off"
           autoFocus
           form="sendMessage"></textarea>

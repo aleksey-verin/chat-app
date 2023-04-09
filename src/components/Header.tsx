@@ -15,14 +15,14 @@ const Header = () => {
     <>
       <header>
         <button onClick={handlePopupOpen} className="settings">
-          Настройки
+          Settings
         </button>
         <div className="theme-switcher">
           <input id="switcher" type="checkbox" />
           <label htmlFor="switcher"></label>
         </div>
         <div className="connection"></div>
-        <button className="exit">Выйти</button>
+        <button className="exit">Log Out</button>
       </header>
       {popupOpen && <PopupSettings handlePopupClose={handlePopupClose} />}
     </>

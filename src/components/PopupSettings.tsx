@@ -40,23 +40,23 @@ const PopupSettings = ({ handlePopupClose }: PopupSettingsProps) => {
     <div className="popup active">
       <div className="popup-container">
         <div className="popup-title">
-          <div className="title__text">Настройки</div>
+          <div className="title__text">Settings</div>
           <div onClick={handlePopupClose} className="title__close">
             ╳
           </div>
         </div>
         <div className="popup-content login-code">
-          <div className="content-title">Текущее имя пользователя:</div>
+          <div className="content-title">Current user name:</div>
           <form onSubmit={handleNewNameForm} className="content-form">
             <input
               onChange={(e) => setInputNewNameValue(e.target.value)}
               value={inputNewNameValue}
               className="content-input"
               type="text"
-              placeholder="Введите имя пользователя.."
+              placeholder="enter your name.."
             />
             <button disabled={isLoading} className="content-btn" type="submit">
-              Изменить
+              Edit name
             </button>
 
             {isLoading && <Loader />}

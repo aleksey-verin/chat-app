@@ -1,13 +1,21 @@
 import React from 'react';
 
-const Message = () => {
+interface MessageProps {
+  text: string;
+  email: string;
+  name: string;
+  time: string;
+  type: string;
+}
+
+const Message = ({ text, email, name, time, type }: MessageProps) => {
   return (
-    <div className="message">
+    <div className={`message ${type}`}>
       <div className="content">
-        <div className="message__user"></div>
+        <div className="message__user">{name ? name : email}</div>
         <div className="message__content">
-          <span className="message-text"></span>
-          <div className="message__time"></div>
+          <span className="message-text">{text}</span>
+          <div className="message__time">12:00</div>
         </div>
       </div>
     </div>

@@ -76,23 +76,23 @@ const Login = () => {
       {emailPopup && (
         <div className="popup-container">
           <div className="popup-title">
-            <div className="title__text">Авторизация</div>
+            <div className="title__text">Authorization</div>
           </div>
           <div className="popup-content login-code">
-            <div className="content-title">Почта:</div>
+            <div className="content-title">Email:</div>
             <form onSubmit={handleEmailForm} className="content-form">
               <input
                 onChange={(e) => setInputEmailValue(e.target.value)}
                 value={inputEmailValue}
                 className="content-input"
                 type="email"
-                placeholder="Введите адрес почты.."
+                placeholder="enter email.."
               />
               <button disabled={isLoadingEmail} className="content-btn" type="submit">
-                Получить код
+                Get code
               </button>
               <a onClick={handleCodeLink} className="link-code">
-                Уже есть код?
+                already have the code?
               </a>
               {isLoadingEmail && <Loader />}
               {isErrorEmail && <Error message={errorTypeEmail} />}
@@ -103,23 +103,23 @@ const Login = () => {
       {codePopup && (
         <div className="popup-container">
           <div className="popup-title">
-            <div className="title__text">Подтверждение</div>
+            <div className="title__text">Confirmation</div>
           </div>
           <div className="popup-content login-code">
-            <div className="content-title">Код:</div>
+            <div className="content-title">Code from email:</div>
             <form onSubmit={handleCodeForm} className="content-form">
               <input
                 onChange={(e) => setInputCodeValue(e.target.value)}
                 value={inputCodeValue}
                 className="content-input"
                 type="text"
-                placeholder="Введите код из письма.."
+                placeholder="enter code from email.."
               />
               <button disabled={isLoadingCode} className="content-btn" type="submit">
                 Войти
               </button>
               <a onClick={handleEmailLink} className="link-code">
-                Не пришло письмо с кодом?
+                Did you not receive an email?
               </a>
               {isLoadingCode && <Loader />}
               {isErrorCode && <Error message={errorTypeCode} />}
