@@ -29,10 +29,6 @@ interface iUser {
   token: string;
 }
 
-// interface iChangeName {
-//   name: string
-// }
-
 const initialState = {
   isAuth: localStorageGetItem(storage.chatAppIsAuth) || false,
   userName: localStorageGetItem(storage.chatAppUserName) || null,
