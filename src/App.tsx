@@ -14,6 +14,25 @@ function App() {
   const dispatch = useAppDispatch();
   const { isAuth, userToken } = useSelector(selectorUserAuthenticationSlice);
 
+  const url = 'wss://edu.strada.one/websockets?';
+
+  if (!userToken) return;
+  const socket = new WebSocket(`${url}${userToken}`);
+  socket.onopen = () => {
+    console.log('Connected');
+  };
+  socket.onmessage = (event) => {
+    const {
+      createdAt,
+      text,
+      user: { email, name }
+    } = JSON.parse(event.data);
+    console.log(name, text);
+    // addMessage(text, email, name, createdAt, 'socket')
+  };
+  // useEffect(() => {
+  // }, []);
+
   useEffect(() => {
     if (userToken) {
       dispatch(getMessages(userToken));

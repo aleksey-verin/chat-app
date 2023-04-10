@@ -11,6 +11,7 @@ import {
   selectorUserAuthenticationSlice
 } from '../store/reducers/userAuthenticationSlice';
 import Loader from '../assets/Loader';
+import { getMessages } from '../store/reducers/messagesSlice';
 
 const defaultValue = {
   email: '',
@@ -61,6 +62,7 @@ const Login = () => {
     const minLength = 3;
     if (inputCodeValue.length < minLength) return;
     dispatch(getUserAuthentication(inputCodeValue));
+    dispatch(getMessages(inputCodeValue));
     setInputCodeValue(defaultValue.code);
   };
 
