@@ -17,14 +17,14 @@ function App() {
   const dispatch = useAppDispatch();
   const { isAuth, userToken } = useSelector(selectorUserAuthenticationSlice);
 
-  const socket = new WebSocket(`${url}${userToken}`);
+  // const socket = new WebSocket(`${url}${userToken}`);
 
   useEffect(() => {
     if (isAuth && userToken) {
       dispatch(getMessages(userToken));
-      socket.onopen = () => {
-        console.log('Connected');
-      };
+      // socket.onopen = () => {
+      //   console.log('Connected');
+      // };
       // websocketConnect(userToken);
     }
   }, [isAuth]);
