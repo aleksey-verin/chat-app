@@ -16,7 +16,7 @@ function App() {
 
   const url = 'wss://edu.strada.one/websockets?';
 
-  if (!userToken) return;
+  if (!userToken) return null;
   const socket = new WebSocket(`${url}${userToken}`);
   socket.onopen = () => {
     console.log('Connected');
