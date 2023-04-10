@@ -9,35 +9,25 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getMessages } from './store/reducers/messagesSlice';
 import { useAppDispatch } from './store/store';
+// import { websocketConnect } from './utils/websocket';
+
+const url = 'wss://edu.strada.one/websockets?';
 
 function App() {
   const dispatch = useAppDispatch();
   const { isAuth, userToken } = useSelector(selectorUserAuthenticationSlice);
 
-  const url = 'wss://edu.strada.one/websockets?';
-
-  if (!userToken) return null;
   const socket = new WebSocket(`${url}${userToken}`);
-  socket.onopen = () => {
-    console.log('Connected');
-  };
-  socket.onmessage = (event) => {
-    const {
-      createdAt,
-      text,
-      user: { email, name }
-    } = JSON.parse(event.data);
-    console.log(name, text);
-    // addMessage(text, email, name, createdAt, 'socket')
-  };
-  // useEffect(() => {
-  // }, []);
 
   useEffect(() => {
-    if (userToken) {
+    if (isAuth && userToken) {
       dispatch(getMessages(userToken));
+      socket.onopen = () => {
+        console.log('Connected');
+      };
+      // websocketConnect(userToken);
     }
-  }, []);
+  }, [isAuth]);
 
   return (
     <div className="wrapper">

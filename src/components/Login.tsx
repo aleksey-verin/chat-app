@@ -62,7 +62,6 @@ const Login = () => {
     const minLength = 3;
     if (inputCodeValue.length < minLength) return;
     dispatch(getUserAuthentication(inputCodeValue));
-    dispatch(getMessages(inputCodeValue));
     setInputCodeValue(defaultValue.code);
   };
 
