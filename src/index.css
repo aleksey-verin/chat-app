@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 /*Обнуление*/
 * {
   padding: 0;
@@ -92,7 +92,7 @@ h6 {
 
 /*--------------------*/
 /* Light theme colors */
-body[data-theme='light'] {
+body[data-theme=light] {
   --color-1: rgb(255, 255, 255);
   --color-2: rgb(235, 235, 235);
   --color-3: rgb(210, 210, 210);
@@ -102,7 +102,7 @@ body[data-theme='light'] {
 }
 
 /* Dark theme colors */
-body[data-theme='dark'] {
+body[data-theme=dark] {
   --color-1: rgb(30, 30, 30);
   --color-2: rgb(40, 40, 40);
   --color-3: rgb(60, 60, 60);
@@ -113,7 +113,7 @@ body[data-theme='dark'] {
 
 /*--------------------*/
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: var(--color-2);
   font-size: 16px;
   max-width: 100vw;
@@ -293,7 +293,7 @@ main {
 .scroll {
   z-index: 2;
   position: fixed;
-  /* display: none; */
+  display: none;
   width: 40px;
   height: 40px;
   border-radius: 20px;
@@ -312,7 +312,7 @@ main {
 }
 
 .scroll::after {
-  content: '›';
+  content: "›";
   position: relative;
   width: 100%;
   height: 100%;
@@ -352,7 +352,7 @@ footer {
   background-color: rgba(0, 0, 0, 0.8);
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 3;
 }
 
 .popup.active {
@@ -465,7 +465,7 @@ footer {
 
 .theme-switcher label::after {
   position: absolute;
-  content: '🔆';
+  content: "🔆";
   font-size: 10px;
   line-height: 20px;
   text-align: center;
@@ -484,7 +484,7 @@ footer {
 }
 
 .theme-switcher input:checked + label::after {
-  content: '🌙';
+  content: "🌙";
   background-color: var(--color-2);
   left: calc(100% - 25px);
 }
@@ -538,7 +538,7 @@ footer {
 
 .connection::after {
   position: absolute;
-  content: 'offline';
+  content: "offline";
   font-size: 12px;
   line-height: 20px;
   text-align: center;
@@ -557,7 +557,7 @@ footer {
 }
 
 .connection.connect::after {
-  content: 'online';
+  content: "online";
 }
 
 .connection:hover {
@@ -566,4 +566,4 @@ footer {
 
 .connection.connect:hover {
   background-color: rgb(74, 163, 74);
-} /*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */

@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Main from './components/Main';
 import { selectorUserAuthenticationSlice } from './store/reducers/userAuthenticationSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getMessages } from './store/reducers/messagesSlice';
 import { useAppDispatch } from './store/store';
 // import { websocketConnect } from './utils/websocket';
@@ -16,17 +16,24 @@ function App() {
   const dispatch = useAppDispatch();
   const { isAuth, userToken } = useSelector(selectorUserAuthenticationSlice);
 
+  const [websocket, setWebsocket] = useState(new WebSocket(`${url}${userToken}`));
+
   // const socket = new WebSocket(`${url}${userToken}`); // слетает deploy
 
   useEffect(() => {
     if (isAuth && userToken) {
       dispatch(getMessages(userToken));
-      // socket.onopen = () => { // слетает deploy
-      //   console.log('Connected');
-      // };
       // websocketConnect(userToken);
     }
   }, [isAuth]);
+
+  useEffect(() => {
+    websocket.onopen = () => {
+      // слетает deploy
+      console.log('Connected');
+      // websocket.send(JSON.stringify({ text: 'тест' }));
+    };
+  }, []);
 
   return (
     <div className="wrapper">
