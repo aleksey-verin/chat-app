@@ -6,7 +6,6 @@ import Login from './components/Login';
 import Main from './components/Main';
 import { selectorUserAuthenticationSlice } from './store/reducers/userAuthenticationSlice';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { getMessages } from './store/reducers/messagesSlice';
 import { useAppDispatch } from './store/store';
 // import { websocketConnect } from './utils/websocket';
@@ -17,12 +16,12 @@ function App() {
   const dispatch = useAppDispatch();
   const { isAuth, userToken } = useSelector(selectorUserAuthenticationSlice);
 
-  // const socket = new WebSocket(`${url}${userToken}`);
+  // const socket = new WebSocket(`${url}${userToken}`); // слетает deploy
 
   useEffect(() => {
     if (isAuth && userToken) {
       dispatch(getMessages(userToken));
-      // socket.onopen = () => {
+      // socket.onopen = () => { // слетает deploy
       //   console.log('Connected');
       // };
       // websocketConnect(userToken);

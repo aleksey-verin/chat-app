@@ -114,10 +114,10 @@ const Login = () => {
                 value={inputCodeValue}
                 className="content-input"
                 type="text"
-                placeholder="enter code from email.."
+                placeholder="enter your code.."
               />
               <button disabled={isLoadingCode} className="content-btn" type="submit">
-                Войти
+                Enter
               </button>
               <a onClick={handleEmailLink} className="link-code">
                 Did you not receive an email?
