@@ -8,8 +8,6 @@ import { selectorUserAuthenticationSlice } from './store/reducers/userAuthentica
 import { useEffect, useRef, useState } from 'react';
 import { getMessages } from './store/reducers/messagesSlice';
 import { useAppDispatch } from './store/store';
-import { setConnectionLight } from './store/reducers/connectionSlice';
-// import { websocketConnect } from './utils/websocket';
 
 const url = 'wss://edu.strada.one/websockets?';
 
@@ -23,30 +21,32 @@ function App() {
   const [socketMessages, setSocketMessages] = useState<iMessage[]>([]);
 
   useEffect(() => {
-    const socket = new WebSocket(`${url}${userToken}`);
+    if (isAuth) {
+      const socket = new WebSocket(`${url}${userToken}`);
 
-    socket.onopen = () => {
-      console.log('opened');
-      setIsConnected(true);
-    };
+      socket.onopen = () => {
+        console.log('opened');
+        setIsConnected(true);
+      };
 
-    socket.onclose = () => {
-      console.log('closed');
-      setIsConnected(false);
-    };
+      socket.onclose = () => {
+        console.log('closed');
+        setIsConnected(false);
+      };
 
-    socket.onmessage = (event) => {
-      const newMessage = JSON.parse(event.data);
-      setSocketMessages((socketMessages) => [newMessage, ...socketMessages]);
-      console.log('got message', newMessage);
-    };
+      socket.onmessage = (event) => {
+        const newMessage = JSON.parse(event.data);
+        setSocketMessages((socketMessages) => [newMessage, ...socketMessages]);
+        console.log('got message', newMessage);
+      };
 
-    ws.current = socket;
+      ws.current = socket;
 
-    return () => {
-      socket.close();
-    };
-  }, []);
+      return () => {
+        socket.close();
+      };
+    }
+  }, [isAuth]);
 
   const closeConnection = () => {
     if (ws.current) {

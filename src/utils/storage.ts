@@ -25,3 +25,11 @@ export const localStorageSetItem = (storageItem: string, value: unknown) => {
     console.log(error);
   }
 };
+
+export const localStorageRemoveItem = (storageItem: string) => {
+  try {
+    localStorage.removeItem(storageItem);
+  } catch (error) {
+    console.log(error);
+  }
+};

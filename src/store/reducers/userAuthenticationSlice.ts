@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AppDispatch, IRootState } from '../store';
 import { _url, _user, makeFetchRequest } from '../../utils/userRequest';
-import { localStorageGetItem, storage } from '../../utils/storage';
+import { localStorageGetItem, localStorageRemoveItem, storage } from '../../utils/storage';
 
 interface initialStateTypes {
   isAuth: boolean | null;
@@ -97,7 +97,14 @@ export const changeUserName = createAsyncThunk<
 export const userAuthenticationSlice = createSlice({
   name: 'userAuthenticationSlice',
   initialState: initialState as initialStateTypes,
-  reducers: {},
+  reducers: {
+    setLogout: (state) => {
+      state.isAuth = false;
+      state.userName = null;
+      state.userEmail = null;
+      state.userToken = null;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(getUserAuthentication.pending, (state) => {
       state.isAuth = false;
@@ -141,5 +148,7 @@ export const userAuthenticationSlice = createSlice({
 });
 
 export const selectorUserAuthenticationSlice = (state: IRootState) => state.userAuthenticationSlice;
+
+export const { setLogout } = userAuthenticationSlice.actions;
 
 export default userAuthenticationSlice.reducer;

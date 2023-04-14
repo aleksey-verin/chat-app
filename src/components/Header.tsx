@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PopupSettings from './PopupSettings';
-import { useSelector } from 'react-redux';
-import { selectorConnection } from '../store/reducers/connectionSlice';
+import { useAppDispatch } from '../store/store';
+import { setLogout } from '../store/reducers/userAuthenticationSlice';
 
 interface HeaderProps {
   isConnected: boolean;
@@ -9,6 +9,8 @@ interface HeaderProps {
 }
 
 const Header = ({ isConnected, closeConnection }: HeaderProps) => {
+  const dispatch = useAppDispatch();
+
   const [popupOpen, setPopupOpen] = useState(false);
 
   const handlePopupOpen = () => {
@@ -18,8 +20,16 @@ const Header = ({ isConnected, closeConnection }: HeaderProps) => {
     setPopupOpen(false);
   };
 
-  const handleClick = () => {
-    closeConnection();
+  const handleConnectionSwitch = () => {
+    if (isConnected) {
+      closeConnection();
+    } else {
+      window.location.reload();
+    }
+  };
+
+  const handleLogout = () => {
+    dispatch(setLogout());
   };
 
   return (
@@ -32,8 +42,12 @@ const Header = ({ isConnected, closeConnection }: HeaderProps) => {
           <input id="switcher" type="checkbox" />
           <label htmlFor="switcher"></label>
         </div>
-        <div onClick={handleClick} className={`connection ${isConnected ? 'connect' : ''}`}></div>
-        <button className="exit">Log Out</button>
+        <div
+          onClick={handleConnectionSwitch}
+          className={`connection ${isConnected ? 'connect' : ''}`}></div>
+        <button onClick={handleLogout} className="exit">
+          Log Out
+        </button>
       </header>
       {popupOpen && <PopupSettings handlePopupClose={handlePopupClose} />}
     </>
