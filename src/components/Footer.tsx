@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Footer = () => {
+interface FooterProps {
+  sendMessage: (text: string) => void;
+}
+
+const defaultValue = '';
+
+const Footer = ({ sendMessage }: FooterProps) => {
+  const [inputValue, setInputValue] = useState(defaultValue);
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!inputValue.trim().length) return;
+    console.log(inputValue);
+    sendMessage(inputValue);
+    setInputValue(defaultValue);
+  };
+
   return (
     <footer>
-      <form className="send-message" id="sendMessage" action="">
+      <form onSubmit={handleSubmit} className="send-message" id="sendMessage" action="">
         <textarea
           className="textarea-message"
           placeholder="message.."
           autoComplete="off"
           autoFocus
+          value={inputValue}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(e.target.value)}
           form="sendMessage"></textarea>
         <button className="btn-send" type="submit">
           -

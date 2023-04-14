@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PopupSettings from './PopupSettings';
+import { useSelector } from 'react-redux';
+import { selectorConnection } from '../store/reducers/connectionSlice';
 
-const Header = () => {
+interface HeaderProps {
+  isConnected: boolean;
+  closeConnection: () => void;
+}
+
+const Header = ({ isConnected, closeConnection }: HeaderProps) => {
   const [popupOpen, setPopupOpen] = useState(false);
 
   const handlePopupOpen = () => {
@@ -9,6 +16,10 @@ const Header = () => {
   };
   const handlePopupClose = () => {
     setPopupOpen(false);
+  };
+
+  const handleClick = () => {
+    closeConnection();
   };
 
   return (
@@ -21,7 +32,7 @@ const Header = () => {
           <input id="switcher" type="checkbox" />
           <label htmlFor="switcher"></label>
         </div>
-        <div className="connection"></div>
+        <div onClick={handleClick} className={`connection ${isConnected ? 'connect' : ''}`}></div>
         <button className="exit">Log Out</button>
       </header>
       {popupOpen && <PopupSettings handlePopupClose={handlePopupClose} />}
