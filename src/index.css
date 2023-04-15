@@ -342,6 +342,15 @@ footer {
   margin-right: 8px;
 }
 
+.btn-send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-send svg {
+  fill: var(--color-5);
+}
+
 .popup {
   display: none;
   position: absolute;

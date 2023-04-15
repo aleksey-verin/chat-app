@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ImgClose from './image/ImgClose';
 
 interface FooterProps {
   sendMessage: (text: string) => void;
@@ -29,7 +30,7 @@ const Footer = ({ sendMessage }: FooterProps) => {
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(e.target.value)}
           form="sendMessage"></textarea>
         <button className="btn-send" type="submit">
-          -
+          <ImgClose />
         </button>
       </form>
     </footer>
