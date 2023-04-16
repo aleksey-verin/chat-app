@@ -9,6 +9,7 @@ const defaultValue = '';
 
 const Footer = ({ sendMessage }: FooterProps) => {
   const [inputValue, setInputValue] = useState(defaultValue);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = () => {
     if (!inputValue.trim().length) return;
@@ -18,7 +19,11 @@ const Footer = ({ sendMessage }: FooterProps) => {
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
-      if (event.key === 'Enter' && !event.shiftKey) {
+      if (
+        event.key === 'Enter' &&
+        !event.shiftKey &&
+        document.activeElement === textareaRef.current
+      ) {
         event.preventDefault();
         handleSubmit();
       }
@@ -39,7 +44,8 @@ const Footer = ({ sendMessage }: FooterProps) => {
           autoFocus
           value={inputValue}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(e.target.value)}
-          form="sendMessage"></textarea>
+          form="sendMessage"
+          ref={textareaRef}></textarea>
         <button onClick={handleSubmit} className="btn-send" type="submit">
           <ImgClose />
         </button>
