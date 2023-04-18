@@ -25,7 +25,6 @@ const Main = ({ socketMessages }: MainProps) => {
 
   return (
     <main className="">
-      {/* <img className="loader-messages" src="./img/loader.svg" alt="loader" /> */}
       <div className="scroll-container">
         <div className="scroll"></div>
       </div>
