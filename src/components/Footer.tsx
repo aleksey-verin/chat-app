@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ImgClose from './image/ImgClose';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import ImgSend from './image/ImgSend';
 
 interface FooterProps {
   sendMessage: (text: string) => void;
@@ -12,9 +12,13 @@ const Footer = ({ sendMessage }: FooterProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = () => {
+    event?.preventDefault();
     if (!inputValue.trim().length) return;
     sendMessage(inputValue);
     setInputValue(defaultValue);
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+    }
   };
 
   useEffect(() => {
@@ -24,7 +28,6 @@ const Footer = ({ sendMessage }: FooterProps) => {
         !event.shiftKey &&
         document.activeElement === textareaRef.current
       ) {
-        event.preventDefault();
         handleSubmit();
       }
     };
@@ -34,20 +37,28 @@ const Footer = ({ sendMessage }: FooterProps) => {
     };
   }, [inputValue]);
 
+  const handleTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const textarea = e.target;
+    setInputValue(textarea.value);
+    textarea.style.height = 'auto';
+    textarea.style.height = `${textarea.scrollHeight + 2}px`;
+  };
+
   return (
     <footer>
-      <form className="send-message" id="sendMessage">
+      <form onSubmit={handleSubmit} className="send-message" id="sendMessage">
         <textarea
           className="textarea-message"
-          placeholder="message.."
+          placeholder="type your message here.."
           autoComplete="off"
           autoFocus
+          rows={1}
           value={inputValue}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(e.target.value)}
+          onChange={handleTextarea}
           form="sendMessage"
           ref={textareaRef}></textarea>
-        <button onClick={handleSubmit} className="btn-send" type="submit">
-          <ImgClose />
+        <button className="btn-send" type="submit">
+          <ImgSend />
         </button>
       </form>
     </footer>
