@@ -8,12 +8,14 @@ import { selectorUserAuthenticationSlice } from './store/reducers/userAuthentica
 import { useEffect, useRef, useState } from 'react';
 import { getMessages } from './store/reducers/messagesSlice';
 import { useAppDispatch } from './store/store';
+import { selectorTheme } from './store/reducers/themeSlice';
 
 const url = 'wss://edu.strada.one/websockets?';
 
 function App() {
   const dispatch = useAppDispatch();
   const { isAuth, userToken } = useSelector(selectorUserAuthenticationSlice);
+  const { theme } = useSelector(selectorTheme);
 
   const ws = useRef<WebSocket | null>(null);
 
@@ -67,7 +69,7 @@ function App() {
   }, [isAuth]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" data-theme={theme}>
       <div className="container">
         <Header isConnected={isConnected} closeConnection={closeConnection} />
         <Main socketMessages={socketMessages} />

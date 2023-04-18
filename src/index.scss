@@ -96,7 +96,7 @@ h6 {
 /*--------------------*/
 
 /* Light theme colors */
-body[data-theme='light'] {
+.wrapper[data-theme='light'] {
   --color-1: rgb(255, 255, 255);
   --color-2: rgb(235, 235, 235);
   --color-3: rgb(210, 210, 210);
@@ -106,7 +106,7 @@ body[data-theme='light'] {
 }
 
 /* Dark theme colors */
-body[data-theme='dark'] {
+.wrapper[data-theme='dark'] {
   --color-1: rgb(30, 30, 30);
   --color-2: rgb(40, 40, 40);
   --color-3: rgb(60, 60, 60);
@@ -119,13 +119,19 @@ body[data-theme='dark'] {
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: var(--color-2);
   font-size: 16px;
-  max-width: 100vw;
-  max-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.wrapper {
+  background-color: var(--color-2);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
@@ -480,7 +486,7 @@ footer {
   position: absolute;
   content: '\1F506';
   font-size: 10px;
-  line-height: 20px;
+  line-height: 21px;
   text-align: center;
   width: 20px;
   height: 20px;

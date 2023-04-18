@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import PopupSettings from './PopupSettings';
 import { useAppDispatch } from '../store/store';
 import { setLogout } from '../store/reducers/userAuthenticationSlice';
+import { useSelector } from 'react-redux';
+import { selectorTheme, setDarkTheme, setLightTheme } from '../store/reducers/themeSlice';
+import { themes } from '../utils/constants';
 
 interface HeaderProps {
   isConnected: boolean;
@@ -10,6 +13,7 @@ interface HeaderProps {
 
 const Header = ({ isConnected, closeConnection }: HeaderProps) => {
   const dispatch = useAppDispatch();
+  const { theme, isThemeDark } = useSelector(selectorTheme);
 
   const [popupOpen, setPopupOpen] = useState(false);
 
@@ -32,6 +36,10 @@ const Header = ({ isConnected, closeConnection }: HeaderProps) => {
     dispatch(setLogout());
   };
 
+  const changeTheme = () => {
+    theme === themes.dark ? dispatch(setLightTheme()) : dispatch(setDarkTheme());
+  };
+
   return (
     <>
       <header>
@@ -39,7 +47,7 @@ const Header = ({ isConnected, closeConnection }: HeaderProps) => {
           Settings
         </button>
         <div className="theme-switcher">
-          <input id="switcher" type="checkbox" />
+          <input id="switcher" type="checkbox" checked={isThemeDark} onChange={changeTheme} />
           <label htmlFor="switcher"></label>
         </div>
         <div

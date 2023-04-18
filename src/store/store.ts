@@ -4,6 +4,7 @@ import userIdentificationSlice from './reducers/userIdentificationSlice';
 import userAuthenticationSlice from './reducers/userAuthenticationSlice';
 import popupSlice from './reducers/popupSlice';
 import messagesSlice from './reducers/messagesSlice';
+import themeSlice from './reducers/themeSlice';
 import { useDispatch } from 'react-redux';
 import { localStorageSetItem, storage } from '../utils/storage';
 
@@ -11,7 +12,8 @@ export const rootReducer = combineReducers({
   userIdentificationSlice,
   userAuthenticationSlice,
   popupSlice,
-  messagesSlice
+  messagesSlice,
+  themeSlice
 });
 
 export const store = configureStore({
